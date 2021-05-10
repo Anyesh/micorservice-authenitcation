@@ -1,0 +1,27 @@
+scalar Date
+
+type Query {
+  post(id: ID): [Post]
+}
+
+"""
+Boundry Type
+User
+This is the Boundry context for the User
+"""
+type User @key(fields: "id") @extends {
+  id: ID! @external
+  posts: [Post]
+}
+
+"""
+Post
+The `Post` type
+"""
+type Post @key(fields: "id") {
+  id: ID!
+  title: String!
+  body: String!
+  added_at: Date!
+  updated_at: Date!
+}
