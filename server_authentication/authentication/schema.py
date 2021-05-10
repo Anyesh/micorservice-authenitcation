@@ -1,13 +1,10 @@
+import authentication.core.schema
 import graphene
 import graphql_jwt
 import main.schema
 
-import authentication.core.schema
 
-
-class Query(
-    authentication.core.schema.Query, main.schema.Query, graphene.ObjectType
-):
+class Query(authentication.core.schema.Query, main.schema.Query, graphene.ObjectType):
     pass
 
 
