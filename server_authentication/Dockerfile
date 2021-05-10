@@ -11,5 +11,5 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 COPY . .
-
-CMD ["flask", "run"]
+RUN python manage.py makemigrations && python manage.py migrate --run-syncdb
+CMD gunicorn --bind :8302 authentication.wsgi:application
