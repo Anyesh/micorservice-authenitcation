@@ -10,30 +10,24 @@ class DataQuery:
 
     def queryObjectTree(self, json_query):
 
-        results = list(self.tree.execute(json_query))
-
-        return results
+        return list(self.tree.execute(json_query))
 
     def getObjectFilterString(self, argument_dictionary: dict):
 
         filter_string = ""
-        i = 1
-
         if len(argument_dictionary.items()) > 0:
             filter_string = "["
 
-            for k, v in argument_dictionary.items():
+            for i, (k, v) in enumerate(argument_dictionary.items(), start=1):
                 if type(v) == str:
                     v = "'{v}'".format(v=v)
 
                 filter_string = filter_string + "@.{k} is {v}".format(k=k, v=v)
 
                 if i < len(argument_dictionary.items()):
-                    filter_string = filter_string + " and "
+                    filter_string = f"{filter_string} and "
 
-                i += 1
-
-            filter_string = filter_string + "]"
+            filter_string = f"{filter_string}]"
 
         return filter_string
 
